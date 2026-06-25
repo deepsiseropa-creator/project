@@ -1,12 +1,17 @@
 <section id="ai">
-    <h2>🤖 AI Study Assistant</h2>
 
-    <div class="box">
-        <textarea id="aiQuestion" placeholder="Ask a study question..."></textarea>
-        <button onclick="askAI()">Ask AI</button>
-    </div>
+  <h2>🤖 Study Buddy AI</h2>
 
-    <div class="note" id="aiResponse">
-        AI response will appear here.
-    </div>
+  <div class="box">
+    <textarea id="aiQuestion" placeholder="Enter topic or notes..."></textarea>
+
+    <button onclick="askAI('explain')">Explain</button>
+    <button onclick="askAI('summarize')">Summarize</button>
+    <button onclick="askAI('plan')">Study Plan</button>
+  </div>
+
+  <div class="note" id="aiResponse">
+    AI output will appear here.
+  </div>
+
 </section>
