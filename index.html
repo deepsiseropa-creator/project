@@ -4,17 +4,67 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Study Buddy</title>
-
 <link rel="stylesheet" href="style.css">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- Your HTML code goes here -->
+<!-- LOGIN PAGE -->
+<div id="loginPage" class="login-page">
+    <div class="login-box">
+        <h2>📚 Study Buddy Login</h2>
+        <input type="text" id="username" placeholder="Enter username">
+        <input type="password" id="password" placeholder="Enter password">
+        <button onclick="login()">Login</button>
+    </div>
+</div>
+
+<!-- APP -->
+<div id="app" class="hidden">
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h2>📚 Study Buddy</h2>
+    <ul>
+        <li><a href="#dashboard">🏠 Dashboard</a></li>
+        <li><a href="#notes">📝 Notes</a></li>
+    </ul>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+<header>
+<h1>Welcome 👋</h1>
+<button onclick="logout()">Logout</button>
+</header>
+
+<!-- DASHBOARD -->
+<section id="dashboard">
+<div class="cards">
+<div class="card">
+<h2 id="noteCount">0</h2>
+<p>Total Notes</p>
+</div>
+</div>
+</section>
+
+<!-- NOTES CRUD -->
+<section id="notes">
+<h2>📝 Notes (CRUD)</h2>
+
+<div class="box">
+<input type="text" id="noteTitle" placeholder="Title">
+<textarea id="noteText" placeholder="Write note..."></textarea>
+<button onclick="addNote()">Add Note</button>
+</div>
+
+<div id="noteList"></div>
+</section>
+
+</div>
+</div>
 
 <script src="script.js"></script>
-
 </body>
 </html>
