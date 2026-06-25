@@ -1,47 +1,35 @@
-body{
-margin:0;
-font-family:Arial;
-background:#f5f7fb;
+async function askAI(){
+
+const question = document.getElementById("aiQuestion").value;
+const responseBox = document.getElementById("aiResponse");
+
+if(!question){
+responseBox.innerHTML = "Please enter a question";
+return;
 }
 
-/* LOGIN */
-.login-page{
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-background:#0f172a;
-color:white;
+responseBox.innerHTML = "Thinking... 🤖";
+
+try{
+
+const res = await fetch("http://localhost:3000/api/ask", {
+method: "POST",
+headers: {
+"Content-Type": "application/json"
+},
+body: JSON.stringify({ question })
+});
+
+const data = await res.json();
+
+responseBox.innerHTML = `
+<h3>🤖 AI Answer</h3>
+<p>${data.answer}</p>
+`;
+
+}catch(err){
+responseBox.innerHTML = "AI error. Backend not running.";
 }
 
-.login-box{
-background:#1e293b;
-padding:30px;
-border-radius:15px;
-width:300px;
-display:flex;
-flex-direction:column;
-gap:10px;
+document.getElementById("aiQuestion").value = "";
 }
-
-.login-box input{
-padding:10px;
-border:none;
-border-radius:8px;
-}
-
-.login-box button{
-padding:10px;
-border:none;
-background:#2563eb;
-color:white;
-border-radius:8px;
-cursor:pointer;
-}
-
-.hidden{
-display:none;
-}
-
-/* KEEP YOUR OLD CSS (sidebar, cards etc.) */
-/* just reuse your existing styles */
