@@ -1,35 +1,34 @@
-async function askAI(){
+async function askAI(type) {
+  const input = document.getElementById("aiQuestion").value;
+  const box = document.getElementById("aiResponse");
 
-const question = document.getElementById("aiQuestion").value;
-const responseBox = document.getElementById("aiResponse");
+  if (!input) {
+    box.innerHTML = "Enter something first";
+    return;
+  }
 
-if(!question){
-responseBox.innerHTML = "Please enter a question";
-return;
-}
+  box.innerHTML = "Thinking... 🤖";
 
-responseBox.innerHTML = "Thinking... 🤖";
+  try {
+    const res = await fetch("http://localhost:3000/api/ai", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        type: type,
+        input: input
+      })
+    });
 
-try{
+    const data = await res.json();
 
-const res = await fetch("http://localhost:3000/api/ask", {
-method: "POST",
-headers: {
-"Content-Type": "application/json"
-},
-body: JSON.stringify({ question })
-});
+    box.innerHTML = `
+      <h3>🤖 Study Buddy AI</h3>
+      <pre>${data.result}</pre>
+    `;
 
-const data = await res.json();
-
-responseBox.innerHTML = `
-<h3>🤖 AI Answer</h3>
-<p>${data.answer}</p>
-`;
-
-}catch(err){
-responseBox.innerHTML = "AI error. Backend not running.";
-}
-
-document.getElementById("aiQuestion").value = "";
+  } catch (err) {
+    box.innerHTML = "AI Error. Backend not running.";
+  }
 }
