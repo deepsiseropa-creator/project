@@ -1,35 +1,47 @@
-function askAI() {
-
-    const question = document.getElementById("aiQuestion").value.trim();
-    const response = document.getElementById("aiResponse");
-
-    if(question===""){
-        response.innerHTML="<p>Please enter a question.</p>";
-        return;
-    }
-
-    let answer="";
-
-    if(question.toLowerCase().includes("html")){
-        answer="HTML is used to structure webpages using elements like headings, paragraphs and forms.";
-    }
-    else if(question.toLowerCase().includes("css")){
-        answer="CSS is used to style webpages with colors, layouts, fonts and animations.";
-    }
-    else if(question.toLowerCase().includes("javascript")){
-        answer="JavaScript makes webpages interactive by handling events, forms and dynamic content.";
-    }
-    else if(question.toLowerCase().includes("java")){
-        answer="Java is an object-oriented programming language used for web, mobile and enterprise applications.";
-    }
-    else{
-        answer="I'm your Study Buddy AI. I can help explain HTML, CSS, JavaScript, Java and study concepts.";
-    }
-
-    response.innerHTML=`
-        <h3>🤖 AI Answer</h3>
-        <p>${answer}</p>
-    `;
-
-    document.getElementById("aiQuestion").value="";
+body{
+margin:0;
+font-family:Arial;
+background:#f5f7fb;
 }
+
+/* LOGIN */
+.login-page{
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+background:#0f172a;
+color:white;
+}
+
+.login-box{
+background:#1e293b;
+padding:30px;
+border-radius:15px;
+width:300px;
+display:flex;
+flex-direction:column;
+gap:10px;
+}
+
+.login-box input{
+padding:10px;
+border:none;
+border-radius:8px;
+}
+
+.login-box button{
+padding:10px;
+border:none;
+background:#2563eb;
+color:white;
+border-radius:8px;
+cursor:pointer;
+}
+
+.hidden{
+display:none;
+}
+
+/* KEEP YOUR OLD CSS (sidebar, cards etc.) */
+/* just reuse your existing styles */
