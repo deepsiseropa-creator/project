@@ -1,4 +1,4 @@
-async function askAI(type) {
+async function askAI(type = "explain") {
   const input = document.getElementById("aiQuestion").value;
   const box = document.getElementById("aiResponse");
 
@@ -10,7 +10,7 @@ async function askAI(type) {
   box.innerHTML = "🤖 Thinking...";
 
   try {
-    const res = await fetch("/api/ai", {   // IMPORTANT FIX
+    const res = await fetch("http://localhost:3000/api/ai", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -23,13 +23,17 @@ async function askAI(type) {
 
     const data = await res.json();
 
+    if (!res.ok) {
+      throw new Error(data.error || "AI request failed");
+    }
+
     box.innerHTML = `
       <h3>🤖 AI Result</h3>
-      <pre>${data.result}</pre>
+      <p>${data.result}</p>
     `;
 
   } catch (err) {
-    box.innerHTML = "❌ AI not working (backend issue)";
     console.log(err);
+    box.innerHTML = "❌ AI not working (check backend)";
   }
 }
