@@ -28,6 +28,7 @@
     <ul>
         <li><a href="#dashboard">🏠 Dashboard</a></li>
         <li><a href="#notes">📝 Notes</a></li>
+        <li><a href="#ai">🤖 AI</a></li>
     </ul>
 </div>
 
@@ -60,6 +61,27 @@
 </div>
 
 <div id="noteList"></div>
+</section>
+
+<!-- ========================= -->
+<!-- 🤖 AI SECTION (UPDATED) -->
+<!-- ========================= -->
+<section id="ai">
+
+  <h2>🤖 Study Buddy AI</h2>
+
+  <div class="box">
+    <textarea id="aiQuestion" placeholder="Enter topic or notes..."></textarea>
+
+    <button onclick="askAI('explain')">Explain</button>
+    <button onclick="askAI('summarize')">Summarize</button>
+    <button onclick="askAI('plan')">Study Plan</button>
+  </div>
+
+  <div class="note" id="aiResponse">
+    AI output will appear here.
+  </div>
+
 </section>
 
 </div>
