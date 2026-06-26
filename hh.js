@@ -2,6 +2,7 @@ async function askAI(type) {
   const input = document.getElementById("aiQuestion").value;
   const box = document.getElementById("aiResponse");
 
+  // Check for empty input
   if (!input || input.trim() === "") {
     box.innerHTML = "⚠️ Please enter a question";
     return;
@@ -10,7 +11,7 @@ async function askAI(type) {
   box.innerHTML = "🤖 Thinking...";
 
   try {
-    const res = await fetch("https://project-4-fq6o.onrender.com/api/ai", {
+    const res = await fetch("https://project-5-91zb.onrender.com/api/ai", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -33,7 +34,7 @@ async function askAI(type) {
     `;
 
   } catch (err) {
-    console.log(err);
+    console.error(err);
     box.innerHTML = "❌ AI service unavailable. Try again later.";
   }
 }
