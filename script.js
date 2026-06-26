@@ -1,41 +1,42 @@
-async function askAI(type) {
-  const input = document.getElementById("aiQuestion").value;
-  const box = document.getElementById("aiResponse");
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
 
-  // ⚠️ Guardrail 1: empty input
-  if (!input || input.trim() === "") {
-    box.innerHTML = "⚠️ Please enter a question";
-    return;
-  }
+dotenv.config();
 
-  box.innerHTML = "🤖 Thinking...";
+const app = express();
+const PORT = process.env.PORT || 5000;
 
+// Middleware
+app.use(cors());
+app.use(express.json());
+
+// ✅ Root route (fix 404 issue)
+app.get("/", (req, res) => {
+  res.send("Study Buddy Backend is Running 🚀");
+});
+
+// ✅ AI route (frontend calls this)
+app.post("/api/ai", async (req, res) => {
   try {
-    const res = await fetch("/api/ai", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        type,
-        input
-      })
-    });
+    const { type, input } = req.body;
 
-    const data = await res.json();
-
-    // ⚠️ Guardrail 2: backend error handling
-    if (!res.ok) {
-      throw new Error(data.error || "Request failed");
+    if (!input) {
+      return res.status(400).json({ error: "Input is required" });
     }
 
-    box.innerHTML = `
-      <h3>🤖 AI Result</h3>
-      <p>${data.result}</p>
-    `;
+    // 🔥 TEMP RESPONSE (replace with OpenAI later)
+    const result = `You asked: "${input}" | Type: ${type}`;
+
+    res.json({ result });
 
   } catch (err) {
-    console.log(err);
-    box.innerHTML = "❌ AI service unavailable. Try again later.";
+    console.error(err);
+    res.status(500).json({ error: "Server error" });
   }
-}
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
